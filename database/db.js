@@ -7,9 +7,15 @@ mongoose.connect(process.env.DB_LOCATION)
 const db = mongoose.connection;
 mongoose.set('strictQuery', true);
 
-const userSchema = mongoose.Schema({});
+const userSchema = mongoose.Schema({
+  user: { type: String, unique: true },
+  email: { type: String, unique: true },
+  password: { type: String },
+  friendList: [String],
+  gameList: [Object],
+});
 
 const User = mongoose.model('User', userSchema);
 
-module.exports.db = db;
 module.exports.User = User;
+module.exports.db = db;
