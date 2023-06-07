@@ -5,3 +5,5 @@
 config.js
 node_modules/
 snippet.js
+.babelrc
+package-lock.json
