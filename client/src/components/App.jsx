@@ -1,33 +1,47 @@
-import { React, useState, useEffect } from 'react';
-import axios from 'axios';
+import { React, useState, useEffect, createContext } from 'react';
 import Login from './Login';
 import FriendList from './friendlist/FriendList';
 import GameList from './gamelist/GameList';
-
+import axios from 'axios';
 
 function App() {
 
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState('Gina');
+  const [signIn, setSignIn] = useState(true)
+  const [userData, setUserData] = useState({friendList: [], gameList: []})
+  const [friendData, setFriendData] = useState([])
 
-  const [userData, setUserData] = useState({})
   const url = 'http://localhost:3000/api'
 
   const getAll = () => {
-    axios.get(url)
-      .then()
-      .catch();
+    axios.get(`${url}/user`, { params: { user: 'Gina' } })
+      .then(r => setUserData(r.data[0]))
+      .catch(e => console.log(e));
   }
 
   useEffect(() => {
     getAll();
-  }, [])
+  }, [user])
+
+  useEffect(() => {
+    if(userData.friendList.length > 0) {
+      axios.get(`${url}/friends`, { params: { userFriendList: userData.friendList } } )
+      .then(r => {
+        if(r.data.length > 0) setFriendData(r.data)
+      })
+      .catch(e => console.log(e))
+    }
+  }, [userData])
 
   return (
     <div>
-      {<Longin setUser={setUser}/>}
-      <h1>What would you plike to play?</h1>
-      <FriendList />
-      <GameList />
+      {signIn ? null : <Login setUser={setUser} setSignIn={setSignIn} />}
+      {signIn ? <div>
+        <div>Hi, <span id='username'>{user}</span>! Down 2 Play?</div>
+        <FriendList list={userData.friendList}/>
+        <GameList list={userData.gameList} friendData={friendData}/>
+      </div>
+        : null}
     </div>
   );
 }

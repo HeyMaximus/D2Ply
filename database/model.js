@@ -1,29 +1,34 @@
-// var { db, User } = require('./db')
+var { db, User } = require('./db')
 
-// module.exports = {
-//   getAll: () => {
-//     return User.find().sort({word: 1});
-//   },
+module.exports = {
+  getAll: (user) => {
+    return User.find({user: user});
+  },
 
-//   addGame: (searchPk) => {
-//     var queryString = {word: {$regex: searchPk.word, $options: 'i'}};
-//     return User.find(queryString);
-//   },
+  getFriends: (friends) => {
+    console.log('model getting:', friends)
+    return User.find({user: {$in: friends}})
+  },
 
-//   delGame: (word) => {
-//     return Word.deleteOne(word)
-//   },
+  patch: () => {
+    return
+  },
 
-//   post: (newWord) => {
-//     var newDoc = new Word (newWord);
-//     return newDoc.save()
-//   },
+  addGame: () => {
+    return
+  },
 
-//   patch: (data) => {
-//     var filter = {word: data.word}
-//     var update = {def: data.def}
-//     return Word.findOneAndUpdate(filter, update)
-//   },
+  delGame: () => {
+    return
+  },
+
+  post: () => {
+    return
+  },
+
+  patch: () => {
+    return
+  },
 
 
-// }
+}
