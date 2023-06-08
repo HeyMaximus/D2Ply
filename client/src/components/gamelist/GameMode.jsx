@@ -2,7 +2,7 @@ import { React, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 
-function GameMode({ mode, title, friendData }) {
+function GameMode({ mode, title, friendData, i }) {
 
   const [players, setPlayers] = useState(0);
   const [uDown, setUDown] = useState(mode.play);
@@ -10,7 +10,6 @@ function GameMode({ mode, title, friendData }) {
 
   const whoWantsToPlay = () => {
     let count = 0
-    console.log('who play triggered')
     friendData.forEach((e) => {
       let targetGame = e.gameList.find((game) => game.gameTtile === title);
       let targetMode = targetGame.gameModes.find((entry) => entry.mode === mode.mode);
@@ -25,31 +24,40 @@ function GameMode({ mode, title, friendData }) {
   }, [friendData])
 
   const handlePlayClick = (e) => {
-    if(e.target.checked) setPlayers(players + 1);
-    if(!e.target.checked) setPlayers(players - 1);
-    setUDown(!uDown);
-
     const user =  document.querySelector('#username').textContent;
     const payload = {
       user: user,
       title: title,
-      mode: mode,
-      play: uDown,
-    }
-
+      mode: mode.mode,
+      play: !uDown,
+      index: i,
+    };
+    console.log('sending: ', payload)
     axios.patch(`${url}/mode`, payload)
     .then(r => console.log(r))
     .catch(e => console.log(e))
+
+    if(e.target.checked) setPlayers(players + 1);
+    if(!e.target.checked) setPlayers(players - 1);
+    setUDown(!uDown);
   }
 
   return (
-    <div>
-      <h4>{mode.mode}</h4>
-      <div>Ave time: {mode.aveTime === 0 ? <span>&infin;</span> :mode.aveTime}min</div>
+    <div className="mode">
+      {players >= mode.partySize ?
+     <div className="playercount">
+     <div><input type='checkbox' onChange={handlePlayClick} checked={uDown}></input> {mode.mode}</div>
+     <div className="avetime">{mode.aveTime === 0 ? <span>&infin;</span> :mode.aveTime}min</div>
+     <div>Players: {players} / {mode.partySize}</div>
+     </div>
+
+     :<div>
+      <div><input type='checkbox' onChange={handlePlayClick} checked={uDown}></input> {mode.mode}</div>
+      <div className="avetime">{mode.aveTime === 0 ? <span>&infin;</span> :mode.aveTime}min</div>
       <div>Players: {players} / {mode.partySize}</div>
-      <input type='checkbox' onChange={handlePlayClick} checked={uDown}></input>
+      </div>}
     </div>
-  );
+  )
 }
 
 export default GameMode;

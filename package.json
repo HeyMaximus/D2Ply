@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
-    "client-dev": "npx webpack --watch",
+    "client-dev": "npx webpack --watch --config webpack.config.js",
     "build": "npx webpack",
     "start": "npm run server-dev & npm run client-dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,12 +22,14 @@
   "homepage": "https://github.com/HeyMaximus/D2Ply#readme",
   "dependencies": {
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.2.2",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "webpack": "^5.82.0"
   },
@@ -43,6 +45,7 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-add-import-extension": "^1.6.0",
     "babel-preset-airbnb": "^5.0.0",
+    "css-loader": "^6.8.1",
     "enzyme": "^3.3.0",
     "eslint": "^8.40.0",
     "eslint-config-airbnb": "^19.0.4",

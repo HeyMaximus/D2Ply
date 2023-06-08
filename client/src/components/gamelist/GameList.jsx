@@ -1,12 +1,18 @@
 import { React, useState, useEffect } from 'react';
 import GameEntry from './GameEntry';
 
-function GameList({list, friendData}) {
+import Stack from 'react-bootstrap/Stack';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+function GameList({ list, friendData }) {
 
   return (
     <div>
-      <h2>Games List</h2>
-      {list.map((e) => <GameEntry game={e} friendData={friendData}/>)}
+      <Row>
+        {list.map((e) => <Col><GameEntry game={e} friendData={friendData}/></Col>)}
+      </Row>
     </div>
   );
 }
