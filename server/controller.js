@@ -14,18 +14,32 @@ module.exports = {
   },
 
   updateMode: (req, res) => {
-    console.log('hitting updateMode with:', req.query)
-    return
+    model.updateMode(req.body)
+    .then(r => res.status(200).send('updated!'))
+    .catch(e => res.status(400).end(e))
+  },
+
+  delGame: (req, res) => {
+    model.delGame(req.body)
+    .then(r => res.status(200).send('game removed!'))
+    .catch(e => res.status(400).end(e))
+  },
+
+  addGame: (req, res) => {
+    model.findGame(req.body)
+    .then(r => {
+      if (r.length) {
+      model.addGame(req.body.user, r[0])
+      .then(r => res.status(200).send('game added!'))
+      .catch(e => res.status(400).end(e));
+      } else {
+        res.status(400).end('D2Ply does not supported yet.')
+      }
+    })
+    .catch(e => console.log(e))
   },
 
 
-  addGame: () => {
-    return
-  },
-
-  delGame: () => {
-    return
-  },
 
   post: () => {
     return

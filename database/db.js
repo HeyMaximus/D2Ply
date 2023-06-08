@@ -15,7 +15,15 @@ const userSchema = mongoose.Schema({
   gameList: [Object],
 });
 
+const gameSchema = mongoose.Schema({
+  gameTtile: { type: String, unique: true },
+  gameThumbnail: String,
+  gameModes: [Object],
+});
+
 const User = mongoose.model('User', userSchema);
+const Game = mongoose.model('Game', gameSchema);
 
 module.exports.User = User;
+module.exports.Game = Game;
 module.exports.db = db;

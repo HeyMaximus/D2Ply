@@ -1,0 +1,68 @@
+.login {
+  margin-top: 10%;
+  margin-left: 20%;
+}
+
+.login h1 {
+  color: #0D6EFD;
+}
+
+.main .h1 {
+  padding: 20px;
+}
+
+.title {
+  background-color: #0D6EFD;
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 30px;
+
+}
+
+.avetime {
+  font-size: smaller;
+}
+
+.friendlist {
+  text-align: right;
+  font-size: x-large;
+}
+
+.game {
+  padding: 20px;
+  background: #1b56f81f;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.playercount {
+  color: #0D6EFD;
+}
+
+.friendbutton {
+  padding-left: 20px;
+}
+
+.mode {
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.gamethumbnail {
+  box-shadow: 8px 9px 20px 0px rgb(178 192 50 / 32%);
+}
+
+.gametitle {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.friendname{
+  margin-right: 10px;
+}
