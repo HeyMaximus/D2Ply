@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-
+import Stack from 'react-bootstrap/Stack';
 
 
 function GameEntry({ game, friendData }) {
@@ -29,7 +29,6 @@ function GameEntry({ game, friendData }) {
           <Col>
             <img className="gamethumbnail" src={game.gameThumbnail} />
             <div className="gametitle">{game.gameTtile} <Button className="gameremovebtn" onClick={() => handleRemove()} variant="outline-primary" size="sm">X</Button></div>
-
           </Col>
           <Col>
             <h3>Game Modes</h3>

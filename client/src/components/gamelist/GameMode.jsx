@@ -12,18 +12,21 @@ function GameMode({ mode, title, friendData, i }) {
     let count = 0
     friendData.forEach((e) => {
       let targetGame = e.gameList.find((game) => game.gameTtile === title);
-      let targetMode = targetGame.gameModes.find((entry) => entry.mode === mode.mode);
-      if (targetMode.play) count++;
+      if (targetGame) {
+        let targetMode = targetGame.gameModes.find((entry) => entry.mode === mode.mode);
+        if (targetMode.play) count++;
+      }
     })
     if (uDown) count++;
     setPlayers(count);
+    return;
   }
-
   useEffect(() => {
     if (friendData.length > 0) whoWantsToPlay();
   }, [friendData])
 
   const handlePlayClick = (e) => {
+    console.log('triggered')
     const user =  document.querySelector('#username').textContent;
     const payload = {
       user: user,
@@ -32,7 +35,7 @@ function GameMode({ mode, title, friendData, i }) {
       play: !uDown,
       index: i,
     };
-    console.log('sending: ', payload)
+
     axios.patch(`${url}/mode`, payload)
     .then(r => console.log(r))
     .catch(e => console.log(e))
@@ -46,18 +49,17 @@ function GameMode({ mode, title, friendData, i }) {
     <div className="mode">
       {players >= mode.partySize ?
      <div className="playercount">
-     <div><input type='checkbox' onChange={handlePlayClick} checked={uDown}></input> {mode.mode}</div>
+     <div><input type='checkbox' onChange={(e) => {handlePlayClick(e)}} checked={uDown}></input> {mode.mode}</div>
      <div className="avetime">{mode.aveTime === 0 ? <span>&infin;</span> :mode.aveTime}min</div>
      <div>Players: {players} / {mode.partySize}</div>
      </div>
 
      :<div>
-      <div><input type='checkbox' onChange={handlePlayClick} checked={uDown}></input> {mode.mode}</div>
+      <div><input type='checkbox' onChange={(e) => {handlePlayClick(e)}} checked={uDown}></input> {mode.mode}</div>
       <div className="avetime">{mode.aveTime === 0 ? <span>&infin;</span> :mode.aveTime}min</div>
       <div>Players: {players} / {mode.partySize}</div>
       </div>}
     </div>
   )
 }
-
 export default GameMode;

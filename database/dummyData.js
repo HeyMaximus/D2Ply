@@ -1,4 +1,4 @@
-const { User } = require('./db');
+const { User, Game } = require('./db');
 
 const seedData = () => {
 
