@@ -14,3 +14,7 @@ Backend: ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-bad
 **D2Play** is a fullstack cordinator for forming groups of friends to play online video games. D2Play addresses the problem where users have to survey friends individually to ask which game and specific game modes they're interested in playing at any given moment. 
 
 This project was concieved, designed, and coded by [Maximus Chen](www.MaximusChen.com)
+
+## Supported Games
+1. League of Legends
+2. Diablo IV
